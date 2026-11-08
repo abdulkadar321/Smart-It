@@ -44,6 +44,7 @@
 
         .dash-card.service { border-top: 4px solid #2563eb; background: #f8fafc; }
         .dash-card.khata { border-top: 4px solid #059669; background: #f8fafc; }
+        .dash-card.party { border-top: 4px solid #7c3aed; background: #f8fafc; }
 
         .back-nav-btn { background: #334155; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-bottom: 10px; font-size: 13px; width: 100%; text-align: center; }
         .back-nav-btn:hover { background: #1e293b; }
@@ -101,7 +102,7 @@
         .card.balance p { color: #2563eb; }
 
         .party-row-flex { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; }
-        .party-name-link { color: #2563eb; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .party-name-link { color: #2563eb; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 14px; }
         .party-name-link:hover { text-decoration: underline; color: #1d4ed8; }
 
         #printSection { display: none; }
@@ -150,25 +151,13 @@
                 <div class="status-info-text"><h5>✅ Ready</h5></div>
                 <p id="countReady" style="color: #166534;">0</p>
             </div>
-            <div class="status-counter-card" onclick="openFilteredJobs('Not Repairable')">
-                <div class="status-info-text"><h5>❌ Not Repairable</h5></div>
-                <p id="countNotRepairable" style="color: #991b1b;">0</p>
+            <div class="status-counter-card" onclick="openFilteredJobs('Delivered')">
+                <div class="status-info-text"><h5>📦 Delivered</h5></div>
+                <p id="countDelivered" style="color: #15803d;">0</p>
             </div>
-            <div class="status-counter-card" onclick="openFilteredJobs('Returned')">
-                <div class="status-info-text"><h5>↩️ Returned</h5></div>
-                <p id="countReturned" style="color: #334155;">0</p>
-            </div>
-            <div class="status-counter-card" onclick="openFilteredJobs('Delivered-Repaired')">
-                <div class="status-info-text"><h5>📦 Delivered Repaired</h5></div>
-                <p id="countDeliveredRepaired" style="color: #15803d;">0</p>
-            </div>
-            <div class="status-counter-card" onclick="openFilteredJobs('Delivered-Not Repairable')">
-                <div class="status-info-text"><h5>🚫 Delivered Unrepaired</h5></div>
-                <p id="countDeliveredNotRepairable" style="color: #9f1239;">0</p>
-            </div>
-            <div class="status-counter-card" onclick="openFilteredJobs('Delivered-Returned Unrepaired')">
-                <div class="status-info-text"><h5>📋 Returned Unrepaired</h5></div>
-                <p id="countDeliveredReturnedUnrepaired" style="color: #854d0e;">0</p>
+            <div class="status-counter-card" onclick="openFilteredJobs('Outsourced Work')">
+                <div class="status-info-text"><h5>📤 Outsourced</h5></div>
+                <p id="countOutsourced" style="color: #9333ea;">0</p>
             </div>
         </div>
 
@@ -184,6 +173,12 @@
                 <h3>Cash</h3>
                 <p>Income & Expenses</p>
             </div>
+
+            <div class="dash-card party full-width" onclick="switchTab('partiesPageTab')" style="grid-column: 1 / -1; border-top-color: #7c3aed; background: #f5f3ff;">
+                <div class="icon">👥</div>
+                <h3 style="color: #6d28d9;">Parties Management</h3>
+                <p>Manage parties & statements</p>
+            </div>
         </div>
 
         <div style="text-align: center; margin-top: 20px; padding-top: 12px; border-top: 1px solid #cbd5e1; color: #475569; font-size: 13px; line-height: 1.4;">
@@ -197,6 +192,22 @@
         <button class="back-nav-btn" onclick="goHome()">⬅ Back to Home</button>
         <h3>⚙️ App Settings & Customization</h3>
 
+        <!-- Firebase Connection Details Card inside Settings -->
+        <div style="background: #fffbe4; padding: 12px 15px; border-radius: 8px; border: 1px solid #fef08a; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div>
+                <h4 style="margin: 0 0 4px 0; color: #854d0e; font-size: 13px; font-weight: bold;">🔥 Firebase Connection Info</h4>
+                <div style="font-size: 12px; color: #713f12; line-height: 1.4;">
+                    <strong>Google Account / Owner Mail:</strong> <span id="fbAccountMail" style="font-weight: bold; color: #0284c7;">smart-it-a1deb@appspot.gserviceaccount.com / Admin Console Mail</span><br>
+                    <strong>Project ID:</strong> <span id="fbProjectId">smart-it-a1deb</span><br>
+                    <strong>Auth Domain:</strong> <span id="fbAuthDomain">smart-it-a1deb.firebaseapp.com</span><br>
+                    <strong>Storage Bucket:</strong> <span id="fbStorage">smart-it-a1deb.firebasestorage.app</span>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <span style="background: #fef08a; color: #854d0e; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; border: 1px solid #fde047;">Connected Cloud Account</span>
+            </div>
+        </div>
+
         <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; border: 1px solid #bae6fd; margin-bottom: 15px;">
             <h4 style="margin-top: 0; color: #0369a1; font-size: 14px;">1. Data Backup & Restore</h4>
             <div style="display: flex; gap: 10px; margin-top: 8px;">
@@ -207,7 +218,7 @@
         </div>
 
         <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; border: 1px solid #bae6fd; margin-bottom: 15px;">
-            <h4 style="margin-top: 0; color: #0369a1; font-size: 14px;">2. Change Frame / Shop Name</h4>
+            <h4 style="margin-top: 0; color: #0369a1; font-size: 14px;">2. Change Shop Name</h4>
             <div class="form-group" style="margin-bottom: 8px;">
                 <label>Shop / Frame Title:</label>
                 <input type="text" id="settingFrameName" placeholder="Enter shop/company name..." style="background: white;">
@@ -216,7 +227,7 @@
         </div>
 
         <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
-            <h4 style="margin-top: 0; color: #1e293b; font-size: 14px;">3. Customize Layout & Views (Columns Arrangement)</h4>
+            <h4 style="margin-top: 0; color: #1e293b; font-size: 14px;">3. Customize Layout & Views</h4>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Dashboard Main Cards Layout:</label>
@@ -321,7 +332,7 @@
         </div>
     </div>
 
-    <!-- TAB 1: SERVICE MANAGEMENT (WITH OUTSOURCED OPTION INSIDE) -->
+    <!-- TAB 1: SERVICE MANAGEMENT -->
     <div id="serviceTab" class="tab-content">
         <button class="back-nav-btn" onclick="switchTab('serviceSubMenu')">⬅ Back to Menu</button>
         <h3 style="font-size: 15px;">📝 New Service Job Registration</h3>
@@ -331,10 +342,10 @@
                 <label style="color: #1e40af; margin-bottom: 6px;">Service Type:</label>
                 <div style="display: flex; gap: 20px;">
                     <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                        <input type="radio" name="serviceType" value="Office" checked style="width: auto; margin: 0;"> 🏢 Office (ഓഫീസിൽ വന്നത്)
+                        <input type="radio" name="serviceType" value="Office" checked style="width: auto; margin: 0;"> 🏢 Office
                     </label>
                     <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                        <input type="radio" name="serviceType" value="On-Call" style="width: auto; margin: 0;"> 📞 On-Call (ഓൺ കോൾ)
+                        <input type="radio" name="serviceType" value="On-Call" style="width: auto; margin: 0;"> 📞 On-Call
                     </label>
                 </div>
             </div>
@@ -366,7 +377,7 @@
                 <input type="text" id="deviceModel" placeholder="e.g., HP / Samsung">
             </div>
             <div class="form-group full">
-                <label>Accessories Included (ബാഗ്, ചാർജർ മുതലായവ):</label>
+                <label>Accessories Included:</label>
                 <input type="text" id="accessoriesInput" placeholder="e.g., Bag, Charger, Mouse, Keyboard">
             </div>
             <div class="form-group">
@@ -391,27 +402,28 @@
                 </select>
             </div>
 
-            <!-- പുറത്ത് സർവീസിന് കൊടുത്തോ എന്ന് അറിയാനുള്ള ഡ്രോപ്പ് ഡൗൺ ബോക്സ് -->
             <div class="form-group full" style="background: #fef3c7; padding: 10px; border-radius: 8px; border: 1px solid #fde68a;">
-                <label style="color: #92400e;">📤 Chip Level / Outsourced Work (പുറത്ത് കൊടുത്തതാണോ?):</label>
+                <label style="color: #92400e;">📤 Chip Level / Outsourced Work:</label>
                 <select id="isOutsourced" onchange="toggleOutsourcedFields()" style="border: 1px solid #f59e0b;">
-                    <option value="No">No (നമ്മുടെ ഷോപ്പിൽ ചെയ്യുന്നത്)</option>
-                    <option value="Yes">Yes (പുറത്തെ സർവീസ് സെന്ററിലേക്ക് കൊടുത്തത്)</option>
+                    <option value="No">No (In-house)</option>
+                    <option value="Yes">Yes (Outsourced)</option>
                 </select>
 
-                <!-- Outsourced 'Yes' ആക്കിയാൽ മാത്രം കാണിക്കുന്ന ഡീറ്റെയിൽസ് ബോക്സ് -->
                 <div id="outsourcedFieldsSection" style="display: none; margin-top: 10px; border-top: 1px dashed #f59e0b; padding-top: 10px;">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label style="color: #92400e;">Outside Service Center Name (എവിടെയാ കൊടുത്തത്):</label>
-                            <input type="text" id="outCenterName" placeholder="e.g., ABC Chip Level Lab">
+                            <label style="color: #92400e;">Outside Service Center Name:</label>
+                            <div style="display: flex; gap: 5px;">
+                                <input type="text" id="outCenterName" list="savedPartiesDatalist" placeholder="Select or type center name..." onchange="autoAddOutsourcedCenterToParty(this.value)" style="flex: 1; background: white;">
+                                <button type="button" onclick="quickAddOutCenter()" style="width: auto; background: #16a34a; padding: 8px 10px; font-size: 12px; white-space: nowrap;" title="Save Center to Parties">+ Add</button>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label style="color: #92400e;">Given Date (കൊടുത്ത തീയതി):</label>
+                            <label style="color: #92400e;">Given Date:</label>
                             <input type="text" id="outGivenDate" placeholder="DD/MM/YYYY">
                         </div>
                         <div class="form-group full">
-                            <label style="color: #92400e;">Expected Return Date (എന്നാ കിട്ടുക):</label>
+                            <label style="color: #92400e;">Expected Return Date:</label>
                             <input type="text" id="outExpectedDate" placeholder="DD/MM/YYYY">
                         </div>
                     </div>
@@ -459,7 +471,7 @@
         </div>
     </div>
 
-    <!-- TAB 1.2: SAVED JOBS LIST -->
+    <!-- SAVED JOBS LIST -->
     <div id="serviceListTab" class="tab-content">
         <button class="back-nav-btn" onclick="switchTab('serviceSubMenu')">⬅ Back to Menu</button>
         <h3 id="listHeading" style="font-size: 15px;">📋 Saved Service Jobs List</h3>
@@ -486,7 +498,7 @@
         </div>
     </div>
 
-    <!-- TAB 3: CASH & EXPENSE KHATA (DASHBOARD) -->
+    <!-- CASH & EXPENSE KHATA -->
     <div id="khataTab" class="tab-content">
         <button class="back-nav-btn" onclick="goHome()">⬅ Back to Home</button>
         <h3 style="font-size: 15px;">💰 Cash & Expense Khata</h3>
@@ -506,7 +518,6 @@
             </div>
         </div>
 
-        <!-- Parties Box linking to Parties Management Page -->
         <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 15px;">
             <div class="dash-card khata" onclick="switchTab('partiesPageTab')" style="padding: 20px; border-top-color: #059669; background: #ecfdf5;">
                 <div class="icon" style="font-size: 30px;">👥</div>
@@ -516,23 +527,21 @@
         </div>
     </div>
 
-    <!-- TAB 3.1: PARTIES MANAGEMENT PAGE -->
+    <!-- PARTIES MANAGEMENT PAGE -->
     <div id="partiesPageTab" class="tab-content">
-        <button class="back-nav-btn" onclick="switchTab('khataTab')">⬅ Back to Cash Khata</button>
-        <h3 style="font-size: 15px;">👥 Parties Management Page</h3>
+        <button class="back-nav-btn" onclick="goHome()">⬅ Back to Home</button>
+        <h3 style="font-size: 15px;">👥 Parties Management & Service Centers</h3>
 
-        <!-- Initially collapsed + Add Party Button -->
         <div style="margin-bottom: 15px; text-align: center;">
             <button type="button" id="togglePartyFormBtn" onclick="togglePartyForm()" style="background: #16a34a; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; font-weight: bold; line-height: 1; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" title="Add New Party">+</button>
         </div>
 
-        <!-- Hidden Party Form Container -->
         <div id="partyFormContainer" style="display: none; background: #f0f9ff; padding: 12px; border-radius: 8px; border: 1px solid #bae6fd; margin-bottom: 15px;">
-            <h4 style="margin-top: 0; color: #0369a1; font-size: 13px;" id="partyFormTitle">Add New Party</h4>
+            <h4 style="margin-top: 0; color: #0369a1; font-size: 13px;" id="partyFormTitle">Add New Party / Service Center</h4>
             <input type="hidden" id="editPartyId" value="">
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Party Name:</label>
+                    <label>Party / Center Name:</label>
                     <input type="text" id="newPartyNameInput" placeholder="Party Name...">
                 </div>
                 <div class="form-group">
@@ -540,7 +549,7 @@
                     <input type="text" id="newPartyPhoneInput" placeholder="Phone Number...">
                 </div>
                 <div class="form-group full">
-                    <label>Address:</label>
+                    <label>Address / Details:</label>
                     <input type="text" id="newPartyAddressInput" placeholder="Address...">
                 </div>
             </div>
@@ -550,12 +559,14 @@
             </div>
         </div>
 
-        <h3 style="font-size: 14px;">📋 All Parties List</h3>
+        <h3 style="font-size: 14px;">📋 Parties List</h3>
         <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
-                        <th>Parties List</th>
+                        <th>Party Name & Contact</th>
+                        <th>Outstanding Balance / Jobs</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="partyTableBody"></tbody>
@@ -563,7 +574,7 @@
         </div>
     </div>
 
-    <!-- TAB 4: INDIVIDUAL PARTY STATEMENT PAGE -->
+    <!-- INDIVIDUAL PARTY STATEMENT PAGE -->
     <div id="partyStatementTab" class="tab-content">
         <button class="back-nav-btn" onclick="switchTab('partiesPageTab')">⬅ Back to Parties List</button>
         
@@ -589,15 +600,15 @@
             </div>
         </div>
 
-        <!-- Cash In / Cash Out Transaction Form -->
-        <div style="background: #ecfdf5; padding: 10px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 10px;">
+        <!-- ADD TRANSACTION SECTION -->
+        <div style="background: #ecfdf5; padding: 10px; border-radius: 8px; border: 1px solid #a7f3d0; margin-bottom: 15px;">
             <h4 id="txFormHeading" style="margin-top: 0; color: #065f46; font-size: 13px;">Add Cash In / Cash Out for this Party</h4>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Transaction Type:</label>
                     <select id="partyTxType">
-                        <option value="Income">Cash In (വരവ്)</option>
-                        <option value="Expense">Cash Out (ചെലവ്)</option>
+                        <option value="Income">Cash In</option>
+                        <option value="Expense">Cash Out</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -613,15 +624,33 @@
                 </div>
                 <div class="form-group">
                     <label>Description / Details:</label>
-                    <input type="text" id="partyTxDesc" placeholder="e.g., Advance, Salary">
+                    <input type="text" id="partyTxDesc" placeholder="e.g., Advance, Service Charge">
                 </div>
             </div>
             <button id="partyTxSaveBtn" style="background: #16a34a; margin-top: 5px;" onclick="addPartyTransaction()">Save Transaction</button>
         </div>
 
-        <h3 style="font-size: 14px;">Transaction History for this Party</h3>
+        <!-- PARTY JOBS SECTION -->
+        <h3 style="font-size: 14px; color: #1e293b; margin-top: 15px;">🔧 Jobs Registered under this Party / Customer</h3>
         <div class="table-responsive">
-            <table style="margin-top: 8px;">
+            <table style="margin-top: 5px;">
+                <thead>
+                    <tr>
+                        <th>Job No & Date</th>
+                        <th>Device & Model</th>
+                        <th>Complaint</th>
+                        <th>Estimate / Bal</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="partyJobsTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- TRANSACTION HISTORY SECTION -->
+        <h3 style="font-size: 14px; color: #1e293b; margin-top: 20px;">💳 Transaction History for this Party</h3>
+        <div class="table-responsive">
+            <table style="margin-top: 5px;">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -732,6 +761,12 @@
         if(outGivenInput && !outGivenInput.value) {
             outGivenInput.value = new Date().toLocaleDateString('en-GB');
         }
+
+        if(document.getElementById('fbProjectId')) {
+            document.getElementById('fbProjectId').innerText = firebaseConfig.projectId;
+            document.getElementById('fbAuthDomain').innerText = firebaseConfig.authDomain;
+            document.getElementById('fbStorage').innerText = firebaseConfig.storageBucket;
+        }
     }
 
     function updateOnlineStatus() {
@@ -765,6 +800,11 @@
             displayJobs();
             updateDashboardJobCounters();
             populateSavedPartiesDatalist();
+            displayPartiesTable();
+            let activeParty = document.getElementById('currentActiveParty').value;
+            if(activeParty) {
+                openPartyStatement(activeParty);
+            }
         }, (error) => {
             loadFromLocalStorage();
         });
@@ -774,6 +814,7 @@
             snapshot.forEach((doc) => { transactions.push(doc.data()); });
             saveToLocalStorage();
             calculateKhataTotals();
+            displayPartiesTable();
             let activeParty = document.getElementById('currentActiveParty').value;
             if(activeParty) {
                 openPartyStatement(activeParty);
@@ -936,7 +977,6 @@
         }
     }
 
-    // Outsourced ഡ്രോപ്പ് ഡൗൺ സെലക്ട് ചെയ്യുമ്പോൾ ഫീൽഡുകൾ കാണിക്കാനുള്ള ഫങ്ഷൻ
     function toggleOutsourcedFields() {
         let isOut = document.getElementById('isOutsourced').value;
         let section = document.getElementById('outsourcedFieldsSection');
@@ -947,15 +987,47 @@
         }
     }
 
+    function autoAddOutsourcedCenterToParty(centerName) {
+        let name = centerName ? centerName.trim() : '';
+        if(!name) return;
+
+        let exists = staffList.some(st => st.name.toLowerCase() === name.toLowerCase());
+        if(!exists) {
+            let staffId = 'staff_' + Date.now();
+            db.collection("staff").doc(staffId).set({
+                id: staffId,
+                name: name,
+                phone: '',
+                address: 'Outsourced Service Center'
+            });
+        }
+    }
+
+    function quickAddOutCenter() {
+        let centerInput = document.getElementById('outCenterName');
+        let name = centerInput ? centerInput.value.trim() : '';
+        if(name === "") {
+            alert('Please type an outside center name first!');
+            return;
+        }
+        let phone = prompt(`Enter phone number for ${name} (Optional):`, "") || "";
+        let staffId = 'staff_' + Date.now();
+        db.collection("staff").doc(staffId).set({ id: staffId, name: name, phone: phone, address: 'Outsourced Service Center' }).then(() => {
+            populateSavedPartiesDatalist();
+            alert(`Outside Center '${name}' added to Parties successfully!`);
+        });
+    }
+
     function updateDashboardJobCounters() {
         document.getElementById('countPending').innerText = jobs.filter(j => j.status === 'Pending').length;
         document.getElementById('countProgress').innerText = jobs.filter(j => j.status === 'In Progress').length;
         document.getElementById('countReady').innerText = jobs.filter(j => j.status === 'Ready').length;
-        document.getElementById('countNotRepairable').innerText = jobs.filter(j => j.status === 'Not Repairable').length;
-        document.getElementById('countReturned').innerText = jobs.filter(j => j.status === 'Returned').length;
-        document.getElementById('countDeliveredRepaired').innerText = jobs.filter(j => j.status === 'Delivered-Repaired').length;
-        document.getElementById('countDeliveredNotRepairable').innerText = jobs.filter(j => j.status === 'Delivered-Not Repairable').length;
-        document.getElementById('countDeliveredReturnedUnrepaired').innerText = jobs.filter(j => j.status === 'Delivered-Returned Unrepaired').length;
+        
+        let deliveredCount = jobs.filter(j => j.status && j.status.startsWith('Delivered')).length;
+        document.getElementById('countDelivered').innerText = deliveredCount;
+
+        let outsourcedCount = jobs.filter(j => j.isOutsourced === 'Yes').length;
+        document.getElementById('countOutsourced').innerText = outsourcedCount;
     }
 
     function switchTab(tabId) {
@@ -988,10 +1060,10 @@
         let btn = document.getElementById('togglePartyFormBtn');
         if(formContainer.style.display === 'none') {
             formContainer.style.display = 'block';
-            btn.style.display = 'none';
+            if(btn) btn.style.display = 'none';
         } else {
             formContainer.style.display = 'none';
-            btn.style.display = 'block';
+            if(btn) btn.style.display = 'block';
             resetPartyForm();
         }
     }
@@ -1001,7 +1073,7 @@
         document.getElementById('newPartyNameInput').value = '';
         document.getElementById('newPartyPhoneInput').value = '';
         document.getElementById('newPartyAddressInput').value = '';
-        document.getElementById('partyFormTitle').innerText = "Add New Party";
+        document.getElementById('partyFormTitle').innerText = "Add New Party / Service Center";
         document.getElementById('savePartyBtn').innerText = "Save Party";
     }
 
@@ -1068,7 +1140,10 @@
 
         let allNamesSet = new Set();
         staffList.forEach(st => allNamesSet.add(st.name));
-        jobs.forEach(j => { if(j.name) allNamesSet.add(j.name); });
+        jobs.forEach(j => { 
+            if(j.name) allNamesSet.add(j.name); 
+            if(j.outCenterName) allNamesSet.add(j.outCenterName);
+        });
 
         allNamesSet.forEach(name => {
             let opt = document.createElement('option');
@@ -1098,23 +1173,84 @@
         if(!tableBody) return;
         tableBody.innerHTML = '';
 
-        if(staffList.length === 0) {
-            tableBody.innerHTML = `<tr><td style="text-align:center; color:#777;">No parties added yet</td></tr>`;
+        let partyMap = new Map();
+        staffList.forEach(st => {
+            partyMap.set(st.name.toLowerCase(), {
+                id: st.id,
+                name: st.name,
+                phone: st.phone || '',
+                address: st.address || '',
+                isRegisteredParty: true
+            });
+        });
+
+        jobs.forEach(j => {
+            if(j.name) {
+                let key = j.name.toLowerCase();
+                if(!partyMap.has(key)) {
+                    partyMap.set(key, {
+                        id: 'job_party_' + Math.random(),
+                        name: j.name,
+                        phone: j.phone || '',
+                        address: 'Customer',
+                        isRegisteredParty: false
+                    });
+                }
+            }
+            if(j.isOutsourced === 'Yes' && j.outCenterName) {
+                let key = j.outCenterName.toLowerCase();
+                if(!partyMap.has(key)) {
+                    partyMap.set(key, {
+                        id: 'out_party_' + Math.random(),
+                        name: j.outCenterName,
+                        phone: '',
+                        address: 'Outsourced Center',
+                        isRegisteredParty: false
+                    });
+                }
+            }
+        });
+
+        if(partyMap.size === 0) {
+            tableBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#777;">No parties found</td></tr>`;
             return;
         }
 
-        staffList.forEach(st => {
+        partyMap.forEach((partyObj) => {
+            let partyJobs = jobs.filter(j => (j.name && j.name.toLowerCase() === partyObj.name.toLowerCase()) || (j.isOutsourced === 'Yes' && j.outCenterName && j.outCenterName.toLowerCase() === partyObj.name.toLowerCase()));
+            
+            let totalPartyBalance = 0;
+            jobs.filter(j => j.name && j.name.toLowerCase() === partyObj.name.toLowerCase()).forEach(j => {
+                let est = parseFloat(j.amount) || 0;
+                let adv = parseFloat(j.advance) || 0;
+                let isDelivered = j.status && j.status.startsWith('Delivered');
+                let bal = isDelivered ? 0 : (est - adv);
+                totalPartyBalance += bal;
+            });
+
             let row = tableBody.insertRow();
+            let actionButtons = '';
+            if(partyObj.isRegisteredParty) {
+                actionButtons = `
+                    <div class="actions-btn">
+                        <button class="btn-edit" onclick="editParty('${partyObj.id}', '${partyObj.name}', '${partyObj.phone}', '${partyObj.address}')">Edit</button>
+                        <button class="btn-del" onclick="deleteParty('${partyObj.id}', '${partyObj.name}')">Delete</button>
+                    </div>
+                `;
+            } else {
+                actionButtons = `<small style="color: #64748b;">(${partyObj.address})</small>`;
+            }
+
             row.innerHTML = `
                 <td>
-                    <div class="party-row-flex">
-                        <span class="party-name-link" onclick="openPartyStatement('${st.name}')">👤 ${st.name}</span>
-                        <div class="actions-btn">
-                            <button class="btn-edit" onclick="editParty('${st.id}', '${st.name}', '${st.phone || ''}', '${st.address || ''}')">Edit</button>
-                            <button class="btn-del" onclick="deleteParty('${st.id}', '${st.name}')">Delete</button>
-                        </div>
-                    </div>
+                    <span class="party-name-link" onclick="openPartyStatement('${partyObj.name}')">👤 ${partyObj.name}</span><br>
+                    <small style="color: #475569;">Phone: ${partyObj.phone || 'N/A'} | Details: ${partyObj.address || 'N/A'}</small>
                 </td>
+                <td>
+                    <strong style="color: ${totalPartyBalance > 0 ? '#dc2626' : '#16a34a'};">Balance: ₹${totalPartyBalance}</strong><br>
+                    <small style="color: #0284c7;">Active Jobs: ${partyJobs.length}</small>
+                </td>
+                <td>${actionButtons}</td>
             `;
         });
     }
@@ -1128,7 +1264,8 @@
         document.getElementById('savePartyBtn').innerText = "Update Party";
 
         document.getElementById('partyFormContainer').style.display = 'block';
-        document.getElementById('togglePartyFormBtn').style.display = 'none';
+        let btn = document.getElementById('togglePartyFormBtn');
+        if(btn) btn.style.display = 'none';
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
@@ -1140,8 +1277,35 @@
 
     function openPartyStatement(partyName) {
         document.getElementById('currentActiveParty').value = partyName;
-        document.getElementById('partyStatementHeading').innerText = `👤 Statement for: ${partyName}`;
+        document.getElementById('partyStatementHeading').innerText = `👤 Statement & Jobs for: ${partyName}`;
 
+        // 1. POPULATE PARTY JOBS TABLE
+        let partyJobsTableBody = document.getElementById('partyJobsTableBody');
+        partyJobsTableBody.innerHTML = '';
+        
+        let partyJobs = jobs.filter(j => (j.name && j.name.toLowerCase() === partyName.toLowerCase()) || (j.isOutsourced === 'Yes' && j.outCenterName && j.outCenterName.toLowerCase() === partyName.toLowerCase()));
+
+        if(partyJobs.length === 0) {
+            partyJobsTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#777;">No jobs found for ${partyName}</td></tr>`;
+        } else {
+            partyJobs.forEach(job => {
+                let est = parseFloat(job.amount) || 0;
+                let adv = parseFloat(job.advance) || 0;
+                let isDelivered = job.status && job.status.startsWith('Delivered');
+                let bal = isDelivered ? 0 : (est - adv);
+
+                let row = partyJobsTableBody.insertRow();
+                row.innerHTML = `
+                    <td><strong>${job.jobNo || 'JOB-1'}</strong><br><small>${job.date}</small></td>
+                    <td><strong>[${job.category || 'Device'}]</strong> ${job.model || ''}</td>
+                    <td><small style="color: #475569;">${job.complaint || ''}</small></td>
+                    <td>Est: ₹${est}<br><small style="color: #2563eb;">Bal: ₹${bal}</small></td>
+                    <td><span style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px;">${job.status}</span></td>
+                `;
+            });
+        }
+
+        // 2. POPULATE PARTY TRANSACTIONS TABLE
         let stmtTableBody = document.getElementById('partyStmtTableBody');
         stmtTableBody.innerHTML = '';
 
@@ -1151,29 +1315,29 @@
 
         if(partyTx.length === 0) {
             stmtTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#777;">No transactions found for ${partyName}</td></tr>`;
+        } else {
+            partyTx.forEach(tx => {
+                if(tx.type === 'Income') pIncome += tx.amount;
+                else pExpense += tx.amount;
+
+                let row = stmtTableBody.insertRow();
+                let colorStyle = tx.type === 'Income' ? 'color: #16a34a; font-weight: bold;' : 'color: #dc2626; font-weight: bold;';
+                
+                row.innerHTML = `
+                    <td>${tx.date}</td>
+                    <td style="${colorStyle}">${tx.type}</td>
+                    <td>${tx.desc}</td>
+                    <td>${tx.mode}</td>
+                    <td style="${colorStyle}">₹${tx.amount}</td>
+                    <td>
+                        <div class="actions-btn">
+                            <button class="btn-edit" onclick="editTransaction(${tx.id})">Edit</button>
+                            <button class="btn-del" onclick="deleteTransaction(${tx.id})">Delete</button>
+                        </div>
+                    </td>
+                `;
+            });
         }
-
-        partyTx.forEach(tx => {
-            if(tx.type === 'Income') pIncome += tx.amount;
-            else pExpense += tx.amount;
-
-            let row = stmtTableBody.insertRow();
-            let colorStyle = tx.type === 'Income' ? 'color: #16a34a; font-weight: bold;' : 'color: #dc2626; font-weight: bold;';
-            
-            row.innerHTML = `
-                <td>${tx.date}</td>
-                <td style="${colorStyle}">${tx.type}</td>
-                <td>${tx.desc}</td>
-                <td>${tx.mode}</td>
-                <td style="${colorStyle}">₹${tx.amount}</td>
-                <td>
-                    <div class="actions-btn">
-                        <button class="btn-edit" onclick="editTransaction(${tx.id})">Edit</button>
-                        <button class="btn-del" onclick="deleteTransaction(${tx.id})">Delete</button>
-                    </div>
-                </td>
-            `;
-        });
 
         let pNetBalance = pIncome - pExpense;
         document.getElementById('partyStmtIncome').innerText = `₹${pIncome}`;
@@ -1323,6 +1487,10 @@
         let outGivenVal = document.getElementById('outGivenDate').value.trim();
         let outExpectedVal = document.getElementById('outExpectedDate').value.trim();
 
+        if(isOutsourcedVal === 'Yes' && outCenterVal) {
+            autoAddOutsourcedCenterToParty(outCenterVal);
+        }
+
         let serviceTypeRadio = document.querySelector('input[name="serviceType"]:checked');
         let serviceType = serviceTypeRadio ? serviceTypeRadio.value : 'Office';
 
@@ -1408,7 +1576,13 @@
 
         let dataToDisplay = jobs;
         if(currentFilterStatus !== 'All') {
-            dataToDisplay = jobs.filter(job => job.status === currentFilterStatus);
+            if(currentFilterStatus === 'Delivered') {
+                dataToDisplay = jobs.filter(job => job.status && job.status.startsWith('Delivered'));
+            } else if(currentFilterStatus === 'Outsourced Work') {
+                dataToDisplay = jobs.filter(job => job.isOutsourced === 'Yes');
+            } else {
+                dataToDisplay = jobs.filter(job => job.status === currentFilterStatus);
+            }
         }
 
         let searchQuery = document.getElementById('searchInput') ? document.getElementById('searchInput').value.toLowerCase() : '';
@@ -1457,7 +1631,6 @@
                 statusDisplay += `<br><small style="color: #334155; font-weight: bold;">Status Date: ${displayDate}</small>`;
             }
 
-            // Outsourced ആണെങ്കിൽ വിവരം ലിസ്റ്റിൽ കാണിക്കാൻ
             let outsourcedInfoDisplay = '';
             if(job.isOutsourced === 'Yes') {
                 outsourcedInfoDisplay = `<br><small style="color: #9333ea; font-weight: bold;">📤 Outsourced: ${job.outCenterName || 'Outside Lab'}</small><br><small style="color: #6b21a8;">Given: ${job.outGivenDate || 'N/A'} | Exp: ${job.outExpectedDate || 'N/A'}</small>`;
@@ -1500,7 +1673,6 @@
         document.getElementById('jobStatus').value = job.status;
         document.getElementById('jobDateInput').value = job.date || new Date().toLocaleDateString('en-GB');
         
-        // Outsourced ഡീറ്റെയിൽസ് എഡിറ്റ് ഫോമിലേക്ക് നൽകുന്നു
         document.getElementById('isOutsourced').value = job.isOutsourced || 'No';
         document.getElementById('outCenterName').value = job.outCenterName || '';
         document.getElementById('outGivenDate').value = job.outGivenDate || new Date().toLocaleDateString('en-GB');
